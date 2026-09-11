@@ -1,0 +1,19 @@
+{
+  "name": "accudraw",
+  "version": "1.0.0",
+  "description": "AccuDraw & SmartLine 1990s Historical Archive, Scans, & Documentation",
+  "type": "luno-web-app",
+  "entrypoint": {
+    "file": "js/AccuDrawArchiveApp.js",
+    "class": "AccuDrawArchiveApp",
+    "method": "run"
+  },
+  "main": [
+    "js/AccuDrawArchiveApp.js"
+  ],
+  "library": [
+    "DomBasics.js",
+    "UITools.js"
+  ],
+  "styles": []
+}
