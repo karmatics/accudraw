@@ -1,19 +1,62 @@
 {
   "name": "accudraw",
-  "version": "1.0.0",
-  "description": "AccuDraw & SmartLine 1990s Historical Archive, Scans, & Documentation",
+  "version": "1.2.0",
+  "description": "AccuDraw & SmartLine: 30-Year Historical Archive, Patents, Lore & Economic Valuation",
   "type": "luno-web-app",
+  "mainClass": "AccuDrawArchiveApp",
   "entrypoint": {
     "file": "js/AccuDrawArchiveApp.js",
     "class": "AccuDrawArchiveApp",
     "method": "run"
   },
   "main": [
+    "js/AccuDrawData.js",
     "js/AccuDrawArchiveApp.js"
   ],
   "library": [
     "DomBasics.js",
     "UITools.js"
   ],
-  "styles": []
+  "styles": [],
+  "visibilitySets": {
+    "ui-focus": [
+      "js/AccuDrawArchiveApp.js",
+      "luno.json"
+    ],
+    "ui-and-data": [
+      "js/AccuDrawArchiveApp.js",
+      "js/AccuDrawData.js",
+      "luno.json"
+    ],
+    "articles": [
+      "accudraw_page1.html",
+      "accudraw_page2.html",
+      "accudraw3d_page1.html",
+      "accudraw3d_page2.html",
+      "accudraw3d_page3.html"
+    ],
+    "full-app": [
+      "js/AccuDrawArchiveApp.js",
+      "js/AccuDrawData.js",
+      "index.html",
+      "luno.json"
+    ]
+  },
+  "processedCountSinceCheckpoint": 15,
+  "lastCheckpointTime": "2026-10-02T19:30:00.000Z",
+  "pendingCheckpointDescription": "Added lightweight visibility sets and streamlined sticky navigation with anti-trap scrolling",
+  "changedMethods": {
+    "luno.json": "2026-10-03T02:30:53.716Z",
+    "index.html": "2026-10-03T02:30:53.716Z",
+    "js/AccuDrawArchiveApp.js": "2026-10-03T02:30:53.716Z",
+    "CadPlan/js/CadStudioDemoComponent.js": "2026-10-17T01:10:32.365Z",
+    "CadPlan/js/CadInteractiveDemoContent.js": "2026-10-17T01:10:32.365Z",
+    "CadPlan/js/curve/UpdateControlPoints.js": "2026-10-17T01:04:01.951Z",
+    "accuCad/js/commands/DrawCurveCommand.js": "2026-10-17T01:04:01.951Z",
+    "accuCad/js/Main.js": "2026-10-17T01:05:03.658Z",
+    "accuCad/js/BezierVertex.js": "2026-10-17T01:05:58.190Z",
+    "accuCad/js/UpdateControlPoints.js": "2026-10-17T01:05:58.190Z",
+    "accuCad/luno.json": "2026-10-17T01:05:58.190Z",
+    "CadPlan/luno.json": "2026-10-17T01:11:56.371Z"
+  }
 }
