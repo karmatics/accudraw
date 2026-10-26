@@ -17,251 +17,287 @@ class AccuDrawArchiveApp {
   }
 
   render() {
-      const target = this.container;
-      target.innerHTML = "";
+    const target = this.container;
+    target.innerHTML = "";
 
-      const isPrint = this.viewMode === "print";
-      const isLight = this.viewMode === "light" || isPrint;
+    const isPrint = this.viewMode === "print";
+    const isLight = this.viewMode === "light" || isPrint;
 
-      const bg = isLight ? "#ffffff" : "#080c14";
-      const cardBg = isLight ? "#f8fafc" : "#0f172a";
-      const panelInner = isLight ? "#ffffff" : "#0a0f1d";
-      const text = isLight ? "#0f172a" : "#f1f5f9";
-      const textMuted = isLight ? "#475569" : "#94a3b8";
-      const border = isLight ? "#cbd5e1" : "#1e293b";
-      const accent = isLight ? "#0284c7" : "#38bdf8";
+    const bg = isLight ? "#ffffff" : "#080c14";
+    const cardBg = isLight ? "#f8fafc" : "#0f172a";
+    const panelInner = isLight ? "#ffffff" : "#0a0f1d";
+    const text = isLight ? "#0f172a" : "#f1f5f9";
+    const textMuted = isLight ? "#475569" : "#94a3b8";
+    const border = isLight ? "#cbd5e1" : "#1e293b";
+    const accent = isLight ? "#0284c7" : "#38bdf8";
 
-      this.applyStyles(isLight, bg, cardBg, border, accent, text, textMuted);
+    this.applyStyles(isLight, bg, cardBg, border, accent, text, textMuted);
 
-      target.style.cssText = [
-        "background:" + bg + ";",
-        "color:" + text + ";",
-        "min-height:100vh;",
-        "padding:0.75rem 1rem 3rem 1rem;",
-        "font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;",
-        "line-height:1.6;",
-        "box-sizing:border-box;"
-      ].join("");
+    target.style.cssText = [
+      "background:" + bg + ";",
+      "color:" + text + ";",
+      "min-height:100vh;",
+      "padding:0.75rem 1rem 3rem 1rem;",
+      "font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;",
+      "line-height:1.6;",
+      "box-sizing:border-box;"
+    ].join("");
 
-      const pageWrapper = document.createElement("div");
-      pageWrapper.style.cssText = "max-width:1080px; margin:0 auto; display:flex; flex-direction:column; gap:1.25rem;";
+    const pageWrapper = document.createElement("div");
+    pageWrapper.style.cssText = "max-width:1080px; margin:0 auto; display:flex; flex-direction:column; gap:1.25rem;";
 
-      // Top Header Banner
-      const topBar = document.createElement("div");
-      topBar.style.cssText = "display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-bottom:1px solid " + border + "; padding-bottom:0.85rem;";
+    // Top Header Banner
+    const topBar = document.createElement("div");
+    topBar.style.cssText = "display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-bottom:1px solid " + border + "; padding-bottom:0.85rem;";
 
-      const brandBlock = document.createElement("div");
-      brandBlock.innerHTML = [
-        "<div style='display:flex; align-items:center; gap:0.5rem;'>",
-        "  <span style='font-size:1.4rem;'>📐</span>",
-        "  <h1 style='margin:0; font-size:1.3rem; font-weight:800; color:" + accent + "; letter-spacing:-0.01em;'>AccuDraw & SmartLine Archive</h1>",
-        "  <span style='font-size:0.68rem; font-weight:bold; background:" + (isLight ? "#e0f2fe" : "rgba(56,189,248,0.15)") + "; color:" + accent + "; border:1px solid " + accent + "66; padding:0.15rem 0.5rem; border-radius:12px;'>1994–2026 Historical Record</span>",
-        "</div>",
-        "<p style='margin:0.2rem 0 0 0; font-size:0.82rem; color:" + textMuted + ";'>Robert J. Brown's Foundational CAD Inventions, Bentley Systems' First Patent (#5,754,182), & Economic Valuation</p>"
-      ].join("");
+    const brandBlock = document.createElement("div");
+    brandBlock.innerHTML = [
+      "<div style='display:flex; align-items:center; gap:0.5rem;'>",
+      "  <span style='font-size:1.4rem;'>📐</span>",
+      "  <h1 style='margin:0; font-size:1.3rem; font-weight:800; color:" + accent + "; letter-spacing:-0.01em;'>AccuDraw & SmartLine Archive</h1>",
+      "  <span style='font-size:0.68rem; font-weight:bold; background:" + (isLight ? "#e0f2fe" : "rgba(56,189,248,0.15)") + "; color:" + accent + "; border:1px solid " + accent + "66; padding:0.15rem 0.5rem; border-radius:12px;'>1994–2026 Historical Record</span>",
+      "</div>",
+      "<p style='margin:0.2rem 0 0 0; font-size:0.82rem; color:" + textMuted + ";'>Robert J. Brown's Foundational CAD Inventions, Bentley Systems' First Patent (#5,754,182), & Economic Valuation</p>"
+    ].join("");
 
-      const modeControls = document.createElement("div");
-      modeControls.style.cssText = "display:flex; gap:0.35rem; align-items:center;";
+    const modeControls = document.createElement("div");
+    modeControls.style.cssText = "display:flex; gap:0.35rem; align-items:center;";
 
-      const btnDark = document.createElement("button");
-      btnDark.textContent = "🌙 Dark";
-      btnDark.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:" + (!isLight ? "#0284c7" : "#1e293b") + "; color:#fff; border:1px solid " + (!isLight ? "#38bdf8" : "#334155") + ";";
-      btnDark.onclick = () => this.setMode("dark");
+    const ItemNotes = globalThis.DocumentItemNotes || globalThis.CadPlanItemNotes;
+    const DocEditor = globalThis.DocumentEditor || globalThis.CadPlanDocumentEditor;
 
-      const btnLight = document.createElement("button");
-      btnLight.textContent = "☀️ Light";
-      btnLight.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:" + (isLight && !isPrint ? "#0284c7" : "#1e293b") + "; color:#fff; border:1px solid " + (isLight && !isPrint ? "#38bdf8" : "#334155") + ";";
-      btnLight.onclick = () => this.setMode("light");
-
-      const btnPrint = document.createElement("button");
-      btnPrint.textContent = "🖨️ Print Dossier";
-      btnPrint.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:" + (isPrint ? "#0284c7" : "#1e293b") + "; color:#fff; border:1px solid " + (isPrint ? "#38bdf8" : "#334155") + ";";
-      btnPrint.onclick = () => {
-        this.setMode("print");
-        setTimeout(() => window.print(), 120);
-      };
-
-      modeControls.appendChild(btnDark);
-      modeControls.appendChild(btnLight);
-      modeControls.appendChild(btnPrint);
-      topBar.appendChild(brandBlock);
-      topBar.appendChild(modeControls);
-      pageWrapper.appendChild(topBar);
-
-      // Sleek Sticky Navigation Bar (No horizontal scroll track)
-      const stickyNav = document.createElement("nav");
-      stickyNav.className = "accudraw-sticky-nav-bar";
-
-      const navPills = document.createElement("div");
-      navPills.className = "accudraw-nav-pills";
-
-      const sections = [
-        { id: "overview", label: "🏛️ Executive Thesis" },
-        { id: "inventions", label: "⚙️ Inventions & Patents" },
-        { id: "articles", label: "📖 1990s Magazine Articles" },
-        { id: "lore", label: "💬 CAD Lore & Reviews" },
-        { id: "valuation", label: "💰 Multi-Billion Valuation" },
-        { id: "verify", label: "🔍 Self-Verification Sandbox" }
-      ];
-
-      sections.forEach(s => {
-        const isActive = this.activeSection === s.id;
-        const b = document.createElement("button");
-        b.className = "accudraw-pill-btn" + (isActive ? " active" : "");
-        b.textContent = s.label;
-        b.onclick = () => {
-          this.activeSection = s.id;
-          this.render();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        };
-        navPills.appendChild(b);
-      });
-
-      stickyNav.appendChild(navPills);
-      pageWrapper.appendChild(stickyNav);
-
-      // Main Content Area
-      const main = document.createElement("main");
-      main.style.cssText = "display:flex; flex-direction:column; gap:1.75rem;";
-
-      if (this.activeSection === "overview") {
-        main.appendChild(this.buildOverviewSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
-      } else if (this.activeSection === "inventions") {
-        main.appendChild(this.buildInventionsSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
-      } else if (this.activeSection === "articles") {
-        main.appendChild(this.buildArticlesSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
-      } else if (this.activeSection === "lore") {
-        main.appendChild(this.buildLoreSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
-      } else if (this.activeSection === "valuation") {
-        main.appendChild(this.buildValuationSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
-      } else if (this.activeSection === "verify") {
-        main.appendChild(this.buildVerifySection(isLight, cardBg, panelInner, border, accent, text, textMuted));
+    const btnNotes = document.createElement("button");
+    btnNotes.textContent = "⚡ Living Directives";
+    btnNotes.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:#072138; color:#00f2fe; border:1px solid #00f2fe66;";
+    btnNotes.onclick = () => {
+      if (ItemNotes && typeof ItemNotes.openPromptBuilderDialog === 'function') {
+        ItemNotes.openPromptBuilderDialog({ options: { dossierId: 'accudraw' } });
       }
+    };
 
-      pageWrapper.appendChild(main);
+    const btnRevisions = document.createElement("button");
+    btnRevisions.textContent = "✏️ Revisions";
+    btnRevisions.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:#291e05; color:#f59e0b; border:1px solid #f59e0b66;";
+    btnRevisions.onclick = () => {
+      if (DocEditor && typeof DocEditor.openRevisionManager === 'function') {
+        DocEditor.openRevisionManager(() => this.render(), 'accudraw');
+      }
+    };
 
-      // Clean Footer
-      const footer = document.createElement("footer");
-      footer.style.cssText = "border-top:1px solid " + border + "; padding-top:1rem; margin-top:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; font-size:0.75rem; color:" + textMuted + "; font-family:monospace;";
-      footer.innerHTML = [
-        "<span>AccuDraw & SmartLine Archive • Inventor: Robert J. Brown (Bentley Systems First Patent #5,754,182)</span>",
-        "<span>Unanimous Consensus across Claude, Gemini, ChatGPT & Grok</span>"
-      ].join("");
-      pageWrapper.appendChild(footer);
+    const btnDark = document.createElement("button");
+    btnDark.textContent = "🌙 Dark";
+    btnDark.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:" + (!isLight ? "#0284c7" : "#1e293b") + "; color:#fff; border:1px solid " + (!isLight ? "#38bdf8" : "#334155") + ";";
+    btnDark.onclick = () => this.setMode("dark");
 
-      target.appendChild(pageWrapper);
+    const btnLight = document.createElement("button");
+    btnLight.textContent = "☀️ Light";
+    btnLight.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:" + (isLight && !isPrint ? "#0284c7" : "#1e293b") + "; color:#fff; border:1px solid " + (isLight && !isPrint ? "#38bdf8" : "#334155") + ";";
+    btnLight.onclick = () => this.setMode("light");
+
+    const btnPrint = document.createElement("button");
+    btnPrint.textContent = "🖨️ Print";
+    btnPrint.style.cssText = "padding:0.35rem 0.65rem; border-radius:6px; cursor:pointer; font-size:0.75rem; font-weight:bold; font-family:monospace; background:" + (isPrint ? "#0284c7" : "#1e293b") + "; color:#fff; border:1px solid " + (isPrint ? "#38bdf8" : "#334155") + ";";
+    btnPrint.onclick = () => {
+      this.setMode("print");
+      setTimeout(() => window.print(), 120);
+    };
+
+    modeControls.appendChild(btnNotes);
+    modeControls.appendChild(btnRevisions);
+    modeControls.appendChild(btnDark);
+    modeControls.appendChild(btnLight);
+    modeControls.appendChild(btnPrint);
+    topBar.appendChild(brandBlock);
+    topBar.appendChild(modeControls);
+    pageWrapper.appendChild(topBar);
+
+    // Sticky Navigation Bar
+    const stickyNav = document.createElement("nav");
+    stickyNav.className = "accudraw-sticky-nav-bar";
+
+    const navPills = document.createElement("div");
+    navPills.className = "accudraw-nav-pills";
+
+    const sections = [
+      { id: "overview", label: "🏛️ Executive Thesis" },
+      { id: "inventions", label: "⚙️ Inventions & Patents" },
+      { id: "articles", label: "📖 1990s Magazine Articles" },
+      { id: "lore", label: "💬 CAD Lore & Reviews" },
+      { id: "valuation", label: "💰 Multi-Billion Valuation" },
+      { id: "verify", label: "🔍 Self-Verification Sandbox" }
+    ];
+
+    sections.forEach(s => {
+      const isActive = this.activeSection === s.id;
+      const b = document.createElement("button");
+      b.className = "accudraw-pill-btn" + (isActive ? " active" : "");
+      b.textContent = s.label;
+      b.onclick = () => {
+        this.activeSection = s.id;
+        this.render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+      navPills.appendChild(b);
+    });
+
+    stickyNav.appendChild(navPills);
+    pageWrapper.appendChild(stickyNav);
+
+    // Main Content Area
+    const main = document.createElement("main");
+    main.style.cssText = "display:flex; flex-direction:column; gap:1.75rem;";
+
+    if (this.activeSection === "overview") {
+      main.appendChild(this.buildOverviewSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
+    } else if (this.activeSection === "inventions") {
+      main.appendChild(this.buildInventionsSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
+    } else if (this.activeSection === "articles") {
+      main.appendChild(this.buildArticlesSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
+    } else if (this.activeSection === "lore") {
+      main.appendChild(this.buildLoreSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
+    } else if (this.activeSection === "valuation") {
+      main.appendChild(this.buildValuationSection(isLight, cardBg, panelInner, border, accent, text, textMuted));
+    } else if (this.activeSection === "verify") {
+      main.appendChild(this.buildVerifySection(isLight, cardBg, panelInner, border, accent, text, textMuted));
     }
+
+    pageWrapper.appendChild(main);
+
+    // Universal Block Decoration Bridge
+    if (typeof DocumentReader !== 'undefined' && typeof DocumentReader.decorateContainer === 'function') {
+      setTimeout(() => {
+        DocumentReader.decorateContainer(main, {
+          dossierId: 'accudraw',
+          pageId: this.activeSection
+        });
+      }, 0);
+    }
+
+    // Footer
+    const footer = document.createElement("footer");
+    footer.style.cssText = "border-top:1px solid " + border + "; padding-top:1rem; margin-top:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; font-size:0.75rem; color:" + textMuted + "; font-family:monospace;";
+    footer.innerHTML = [
+      "<span>AccuDraw & SmartLine Archive • Inventor: Robert J. Brown (Bentley Systems First Patent #5,754,182)</span>",
+      "<span>Unanimous Consensus across Claude, Gemini, ChatGPT & Grok</span>"
+    ].join("");
+    pageWrapper.appendChild(footer);
+
+    target.appendChild(pageWrapper);
+  }
+
   buildOverviewSection(isLight, cardBg, panelInner, border, accent, text, textMuted) {
-      const card = document.createElement("div");
-      card.style.cssText = "background:" + cardBg + "; border:1px solid " + border + "; border-radius:12px; padding:1.75rem; display:flex; flex-direction:column; gap:1.25rem;";
+    const card = document.createElement("div");
+    card.setAttribute('data-block-id', 'overview_asymmetric_invention');
+    card.style.cssText = "background:" + cardBg + "; border:1px solid " + border + "; border-radius:12px; padding:1.75rem; display:flex; flex-direction:column; gap:1.25rem;";
 
-      card.innerHTML = [
-        "<div style='border-left:4px solid " + accent + "; padding-left:1rem;'>",
-        "  <h2 style='margin:0 0 0.35rem 0; font-size:1.2rem; font-weight:800; color:" + text + ";'>The Asymmetric CAD Invention</h2>",
-        "  <p style='margin:0; font-size:0.9rem; color:" + textMuted + "; line-height:1.5;'>How a 3-year payroll investment in a single interface architect anchored a multi-billion dollar platform for over three decades.</p>",
-        "</div>",
-        "<div style='background:" + (isLight ? "#f0fdf4" : "rgba(16,185,129,0.08)") + "; border:1px solid " + (isLight ? "#bbf7d0" : "rgba(16,185,129,0.25)") + "; border-radius:8px; padding:1rem;'>",
-        "  <p style='margin:0; font-size:0.92rem; font-weight:600; color:" + (isLight ? "#166534" : "#6ee7b7") + "; line-height:1.6;'>",
-        "    \"In realistic counterfactual terms, Bob Brown’s invention of AccuDraw and SmartLine contributed between $2.0 Billion and $8.5 Billion to Bentley Systems' current enterprise valuation—representing one of the highest return-on-investment individual engineering hires in software history.\"",
-        "  </p>",
-        "  <span style='display:block; margin-top:0.4rem; font-size:0.75rem; color:" + textMuted + ";'>— Unanimous consensus across Google Gemini, Anthropic Claude, ChatGPT, and Grok</span>",
-        "</div>",
-        "<div style='display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;'>",
-        "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:1rem;'>",
-        "    <div style='font-size:0.7rem; font-weight:bold; color:" + accent + "; text-transform:uppercase;'>Patent Landmark</div>",
-        "    <div style='font-size:1.1rem; font-weight:bold; margin:0.25rem 0;'>US Patent #5,754,182</div>",
-        "    <p style='margin:0; font-size:0.78rem; color:" + textMuted + ";'>Bentley Systems' first issued patent in corporate history. Sole inventor: Robert J. Brown.</p>",
-        "  </div>",
-        "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:1rem;'>",
-        "    <div style='font-size:0.7rem; font-weight:bold; color:#10b981; text-transform:uppercase;'>Longevity & Retention</div>",
-        "    <div style='font-size:1.1rem; font-weight:bold; margin:0.25rem 0;'>30+ Years Active</div>",
-        "    <p style='margin:0; font-size:0.78rem; color:" + textMuted + ";'>Introduced in MicroStation 95; remains the flagship drafting interaction model in MicroStation 2026.</p>",
-        "  </div>",
-        "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:1rem;'>",
-        "    <div style='font-size:0.7rem; font-weight:bold; color:#a855f7; text-transform:uppercase;'>Corporate ROI Multiple</div>",
-        "    <div style='font-size:1.1rem; font-weight:bold; margin:0.25rem 0;'>5,000x – 10,000x</div>",
-        "    <p style='margin:0; font-size:0.78rem; color:" + textMuted + ";'>Calculated on ~$300,000 in payroll compensation against billions in protected enterprise revenue.</p>",
-        "  </div>",
-        "</div>",
-        "<div style='font-size:0.85rem; color:" + text + "; line-height:1.65; display:flex; flex-direction:column; gap:0.75rem;'>",
-        "  <p style='margin:0;'>",
-        "    In 1994, Robert J. Brown joined Bentley Systems and designed two tools: <strong>AccuDraw</strong> (a dynamic polar/rectangular coordinate compass and shortcut engine) and <strong>SmartLine</strong> (a continuous multi-segment geometry placement tool). Together with intuitive 3D spatial view controls, they transformed MicroStation from an obscure drafting clone into the dominant infrastructure design platform worldwide.",
-        "  </p>",
-        "  <p style='margin:0;'>",
-        "    Prior to AccuDraw, CAD users were forced to type repetitive command-line coordinate codes (like <code>DX=</code>, <code>DL=</code>, and <code>@distance&lt;angle</code>) or create disposable construction lines simply to align endpoints. AccuDraw introduced a floating, context-sensitive compass that anticipated user intent, locked onto drawing axes with single keystrokes, and gave instant visual feedback.",
-        "  </p>",
-        "  <p style='margin:0;'>",
-        "    This archive preserves the complete historical record: original 1990s magazine articles, patent records, CAD community lore, and verified AI evaluations that quantify the economic scale of this singular contribution.",
-        "  </p>",
-        "</div>"
-      ].join("");
+    card.innerHTML = [
+      "<div style='border-left:4px solid " + accent + "; padding-left:1rem;'>",
+      "  <h2 style='margin:0 0 0.35rem 0; font-size:1.2rem; font-weight:800; color:" + text + ";'>The Asymmetric CAD Invention</h2>",
+      "  <p style='margin:0; font-size:0.9rem; color:" + textMuted + "; line-height:1.5;'>How a 3-year payroll investment in a single interface architect anchored a multi-billion dollar platform for over three decades.</p>",
+      "</div>",
+      "<div style='background:" + (isLight ? "#f0fdf4" : "rgba(16,185,129,0.08)") + "; border:1px solid " + (isLight ? "#bbf7d0" : "rgba(16,185,129,0.25)") + "; border-radius:8px; padding:1rem;'>",
+      "  <p style='margin:0; font-size:0.92rem; font-weight:600; color:" + (isLight ? "#166534" : "#6ee7b7") + "; line-height:1.6;'>",
+      "    \"In realistic counterfactual terms, Bob Brown’s invention of AccuDraw and SmartLine contributed between $2.0 Billion and $8.5 Billion to Bentley Systems' current enterprise valuation—representing one of the highest return-on-investment individual engineering hires in software history.\"",
+      "  </p>",
+      "  <span style='display:block; margin-top:0.4rem; font-size:0.75rem; color:" + textMuted + ";'>— Unanimous consensus across Google Gemini, Anthropic Claude, ChatGPT, and Grok</span>",
+      "</div>",
+      "<div style='display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;'>",
+      "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:1rem;' data-block-id='overview_patent_landmark'>",
+      "    <div style='font-size:0.7rem; font-weight:bold; color:" + accent + "; text-transform:uppercase;'>Patent Landmark</div>",
+      "    <div style='font-size:1.1rem; font-weight:bold; margin:0.25rem 0;'>US Patent #5,754,182</div>",
+      "    <p style='margin:0; font-size:0.78rem; color:" + textMuted + ";'>Bentley Systems' first issued patent in corporate history. Sole inventor: Robert J. Brown.</p>",
+      "  </div>",
+      "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:1rem;' data-block-id='overview_longevity_retention'>",
+      "    <div style='font-size:0.7rem; font-weight:bold; color:#10b981; text-transform:uppercase;'>Longevity & Retention</div>",
+      "    <div style='font-size:1.1rem; font-weight:bold; margin:0.25rem 0;'>30+ Years Active</div>",
+      "    <p style='margin:0; font-size:0.78rem; color:" + textMuted + ";'>Introduced in MicroStation 95; remains the flagship drafting interaction model in MicroStation 2026.</p>",
+      "  </div>",
+      "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:1rem;' data-block-id='overview_corporate_roi'>",
+      "    <div style='font-size:0.7rem; font-weight:bold; color:#a855f7; text-transform:uppercase;'>Corporate ROI Multiple</div>",
+      "    <div style='font-size:1.1rem; font-weight:bold; margin:0.25rem 0;'>5,000x – 10,000x</div>",
+      "    <p style='margin:0; font-size:0.78rem; color:" + textMuted + ";'>Calculated on ~$300,000 in payroll compensation against billions in protected enterprise revenue.</p>",
+      "  </div>",
+      "</div>",
+      "<div style='font-size:0.85rem; color:" + text + "; line-height:1.65; display:flex; flex-direction:column; gap:0.75rem;'>",
+      "  <p style='margin:0;'>",
+      "    In 1994, Robert J. Brown joined Bentley Systems and designed two tools: <strong>AccuDraw</strong> (a dynamic polar/rectangular coordinate compass and shortcut engine) and <strong>SmartLine</strong> (a continuous multi-segment geometry placement tool). Together with intuitive 3D spatial view controls, they transformed MicroStation from an obscure drafting clone into the dominant infrastructure design platform worldwide.",
+      "  </p>",
+      "  <p style='margin:0;'>",
+      "    Prior to AccuDraw, CAD users were forced to type repetitive command-line coordinate codes (like <code>DX=</code>, <code>DL=</code>, and <code>@distance&lt;angle</code>) or create disposable construction lines simply to align endpoints. AccuDraw introduced a floating, context-sensitive compass that anticipated user intent, locked onto drawing axes with single keystrokes, and gave instant visual feedback.",
+      "  </p>",
+      "  <p style='margin:0;'>",
+      "    This archive preserves the complete historical record: original 1990s magazine articles, patent records, CAD community lore, and verified AI evaluations that quantify the economic scale of this singular contribution.",
+      "  </p>",
+      "</div>"
+    ].join("");
 
-      return card;
-    }
-
+    return card;
+  }
   buildInventionsSection(isLight, cardBg, panelInner, border, accent, text, textMuted) {
-      const wrapper = document.createElement("div");
-      wrapper.style.cssText = "display:flex; flex-direction:column; gap:1.5rem;";
+    const wrapper = document.createElement("div");
+    wrapper.style.cssText = "display:flex; flex-direction:column; gap:1.5rem;";
 
-      const inventions = AccuDrawData.getInventions();
-      const patents = AccuDrawData.getPatents();
+    const inventions = AccuDrawData.getInventions();
+    const patents = AccuDrawData.getPatents();
 
-      // Inventions Grid
-      const invHeader = document.createElement("div");
-      invHeader.innerHTML = [
-        "<h2 style='margin:0 0 0.25rem 0; font-size:1.2rem; font-weight:800; color:" + accent + ";'>The Core Technical Inventions</h2>",
-        "<p style='margin:0; font-size:0.85rem; color:" + textMuted + ";'>Architected in MDL (MicroStation Development Language) and C by Rob Brown between 1994 and 1997.</p>"
+    // Inventions Grid
+    const invHeader = document.createElement("div");
+    invHeader.innerHTML = [
+      "<h2 style='margin:0 0 0.25rem 0; font-size:1.2rem; font-weight:800; color:" + accent + ";'>The Core Technical Inventions</h2>",
+      "<p style='margin:0; font-size:0.85rem; color:" + textMuted + ";'>Architected in MDL (MicroStation Development Language) and C by Rob Brown between 1994 and 1997.</p>"
+    ].join("");
+    wrapper.appendChild(invHeader);
+
+    inventions.forEach(inv => {
+      const box = document.createElement("div");
+      box.setAttribute('data-block-id', `inv_${inv.id}`);
+      box.style.cssText = "background:" + cardBg + "; border:1px solid " + border + "; border-radius:10px; padding:1.25rem; display:flex; flex-direction:column; gap:0.75rem;";
+
+      const bullets = inv.details.map(d => "<li style='margin-bottom:0.35rem; color:" + text + "; font-size:0.82rem;'>" + d + "</li>").join("");
+
+      box.innerHTML = [
+        "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;'>",
+        "  <div style='display:flex; align-items:center; gap:0.5rem;'>",
+        "    <h3 style='margin:0; font-size:1.05rem; font-weight:bold; color:" + text + ";'>" + inv.name + "</h3>",
+        "    <span style='font-size:0.7rem; color:" + accent + "; font-family:monospace;'>(" + inv.year + ")</span>",
+        "  </div>",
+        "  <span style='font-size:0.72rem; font-weight:bold; background:" + (isLight ? "#e0f2fe" : "rgba(56,189,248,0.15)") + "; color:" + accent + "; padding:0.15rem 0.5rem; border-radius:4px;'>" + inv.badge + "</span>",
+        "</div>",
+        "<p style='margin:0; font-size:0.85rem; color:" + textMuted + "; line-height:1.5;'>" + inv.summary + "</p>",
+        "<ul style='margin:0.25rem 0 0 1.25rem; padding:0;'>",
+        bullets,
+        "</ul>"
       ].join("");
-      wrapper.appendChild(invHeader);
+      wrapper.appendChild(box);
+    });
 
-      inventions.forEach(inv => {
-        const box = document.createElement("div");
-        box.style.cssText = "background:" + cardBg + "; border:1px solid " + border + "; border-radius:10px; padding:1.25rem; display:flex; flex-direction:column; gap:0.75rem;";
+    // Patent Section
+    const patHeader = document.createElement("div");
+    patHeader.style.cssText = "margin-top:0.5rem;";
+    patHeader.innerHTML = [
+      "<h2 style='margin:0 0 0.25rem 0; font-size:1.2rem; font-weight:800; color:#10b981;'>Intellectual Property & Patents</h2>",
+      "<p style='margin:0; font-size:0.85rem; color:" + textMuted + ";'>Sole inventor patents proving independent technical provenance.</p>"
+    ].join("");
+    wrapper.appendChild(patHeader);
 
-        const bullets = inv.details.map(d => "<li style='margin-bottom:0.35rem; color:" + text + "; font-size:0.82rem;'>" + d + "</li>").join("");
-
-        box.innerHTML = [
-          "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;'>",
-          "  <div style='display:flex; align-items:center; gap:0.5rem;'>",
-          "    <h3 style='margin:0; font-size:1.05rem; font-weight:bold; color:" + text + ";'>" + inv.name + "</h3>",
-          "    <span style='font-size:0.7rem; color:" + accent + "; font-family:monospace;'>(" + inv.year + ")</span>",
-          "  </div>",
-          "  <span style='font-size:0.72rem; font-weight:bold; background:" + (isLight ? "#e0f2fe" : "rgba(56,189,248,0.15)") + "; color:" + accent + "; padding:0.15rem 0.5rem; border-radius:4px;'>" + inv.badge + "</span>",
-          "</div>",
-          "<p style='margin:0; font-size:0.85rem; color:" + textMuted + "; line-height:1.5;'>" + inv.summary + "</p>",
-          "<ul style='margin:0.25rem 0 0 1.25rem; padding:0;'>",
-          bullets,
-          "</ul>"
-        ].join("");
-        wrapper.appendChild(box);
-      });
-
-      // Patent Section
-      const patHeader = document.createElement("div");
-      patHeader.style.cssText = "margin-top:0.5rem;";
-      patHeader.innerHTML = [
-        "<h2 style='margin:0 0 0.25rem 0; font-size:1.2rem; font-weight:800; color:#10b981;'>Intellectual Property & Patents</h2>",
-        "<p style='margin:0; font-size:0.85rem; color:" + textMuted + ";'>Sole inventor patents proving independent technical provenance.</p>"
+    patents.forEach(p => {
+      const pBox = document.createElement("div");
+      const safePatId = p.number.replace(/\s+/g, '_').replace(/,/g, '');
+      pBox.setAttribute('data-block-id', `patent_${safePatId}`);
+      pBox.style.cssText = "background:" + panelInner + "; border:1px solid " + border + "; border-left:4px solid #10b981; border-radius:8px; padding:1.1rem; display:flex; flex-direction:column; gap:0.4rem;";
+      pBox.innerHTML = [
+        "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;'>",
+        "  <strong style='color:#10b981; font-size:0.95rem; font-family:monospace;'>" + p.number + ": " + p.title + "</strong>",
+        "  <span style='font-size:0.72rem; color:" + textMuted + "; font-family:monospace;'>Issued: " + p.issued + "</span>",
+        "</div>",
+        "<div style='font-size:0.78rem; color:" + textMuted + ";'>Inventor: <strong>" + p.inventor + "</strong> | Assignee: <strong>" + p.assignee + "</strong> (Filed " + p.filed + ")</div>",
+        "<p style='margin:0.35rem 0 0 0; font-size:0.82rem; color:" + text + "; line-height:1.5;'>" + p.significance + "</p>"
       ].join("");
-      wrapper.appendChild(patHeader);
+      wrapper.appendChild(pBox);
+    });
 
-      patents.forEach(p => {
-        const pBox = document.createElement("div");
-        pBox.style.cssText = "background:" + panelInner + "; border:1px solid " + border + "; border-left:4px solid #10b981; border-radius:8px; padding:1.1rem; display:flex; flex-direction:column; gap:0.4rem;";
-        pBox.innerHTML = [
-          "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem;'>",
-          "  <strong style='color:#10b981; font-size:0.95rem; font-family:monospace;'>" + p.number + ": " + p.title + "</strong>",
-          "  <span style='font-size:0.72rem; color:" + textMuted + "; font-family:monospace;'>Issued: " + p.issued + "</span>",
-          "</div>",
-          "<div style='font-size:0.78rem; color:" + textMuted + ";'>Inventor: <strong>" + p.inventor + "</strong> | Assignee: <strong>" + p.assignee + "</strong> (Filed " + p.filed + ")</div>",
-          "<p style='margin:0.35rem 0 0 0; font-size:0.82rem; color:" + text + "; line-height:1.5;'>" + p.significance + "</p>"
-        ].join("");
-        wrapper.appendChild(pBox);
-      });
-
-      return wrapper;
-    }
-
+    return wrapper;
+  }
   buildArticlesSection(isLight, cardBg, panelInner, border, accent, text, textMuted) {
       const wrapper = document.createElement("div");
       wrapper.style.cssText = "display:flex; flex-direction:column; gap:1.25rem;";
@@ -363,70 +399,72 @@ class AccuDrawArchiveApp {
     }
 
   buildValuationSection(isLight, cardBg, panelInner, border, accent, text, textMuted) {
-      const wrapper = document.createElement("div");
-      wrapper.style.cssText = "display:flex; flex-direction:column; gap:1.5rem;";
+    const wrapper = document.createElement("div");
+    wrapper.style.cssText = "display:flex; flex-direction:column; gap:1.5rem;";
 
-      const consensus = AccuDrawData.getValuationConsensus();
+    const consensus = AccuDrawData.getValuationConsensus();
 
-      const banner = document.createElement("div");
-      banner.style.cssText = "background:linear-gradient(135deg, " + (isLight ? "#f0f9ff" : "#0c1d32") + " 0%, " + cardBg + " 100%); border:2px solid " + accent + "; border-radius:12px; padding:1.5rem; display:flex; flex-direction:column; gap:0.85rem;";
+    const banner = document.createElement("div");
+    banner.setAttribute('data-block-id', 'val_consensus_banner');
+    banner.style.cssText = "background:linear-gradient(135deg, " + (isLight ? "#f0f9ff" : "#0c1d32") + " 0%, " + cardBg + " 100%); border:2px solid " + accent + "; border-radius:12px; padding:1.5rem; display:flex; flex-direction:column; gap:0.85rem;";
 
-      banner.innerHTML = [
+    banner.innerHTML = [
+      "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;'>",
+      "  <h2 style='margin:0; font-size:1.3rem; font-weight:900; color:" + accent + ";'>Multi-Billion Dollar Enterprise Consensus</h2>",
+      "  <span style='font-size:0.75rem; font-weight:bold; background:#0284c7; color:#fff; padding:0.2rem 0.6rem; border-radius:12px;'>Unanimous AI Economic Finding</span>",
+      "</div>",
+      "<p style='margin:0; font-size:0.88rem; color:" + text + "; line-height:1.55;'>" + consensus.keyInsight + "</p>",
+      "<div style='display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; margin-top:0.5rem;'>",
+      "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:0.85rem;' data-block-id='val_midpoint'>",
+      "    <div style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace; text-transform:uppercase;'>Consensus Midpoint</div>",
+      "    <div style='font-size:1.3rem; font-weight:900; color:#38bdf8; margin:0.2rem 0; font-family:monospace;'>" + consensus.consensusMidpoint + "</div>",
+      "    <div style='font-size:0.72rem; color:" + textMuted + ";'>Direct long-term enterprise value</div>",
+      "  </div>",
+      "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:0.85rem;' data-block-id='val_range'>",
+      "    <div style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace; text-transform:uppercase;'>Full Valuation Range</div>",
+      "    <div style='font-size:1.3rem; font-weight:900; color:#10b981; margin:0.2rem 0; font-family:monospace;'>" + consensus.consensusValuationRange + "</div>",
+      "    <div style='font-size:0.72rem; color:" + textMuted + ";'>Across conservative and strategic models</div>",
+      "  </div>",
+      "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:0.85rem;' data-block-id='val_roi'>",
+      "    <div style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace; text-transform:uppercase;'>Estimated Payroll ROI</div>",
+      "    <div style='font-size:1.3rem; font-weight:900; color:#f59e0b; margin:0.2rem 0; font-family:monospace;'>" + consensus.impliedPayrollROI + "</div>",
+      "    <div style='font-size:0.72rem; color:" + textMuted + ";'>On ~$300,000 in mid-90s compensation</div>",
+      "  </div>",
+      "</div>"
+    ].join("");
+    wrapper.appendChild(banner);
+
+    // Breakdown per model
+    const list = document.createElement("div");
+    list.style.cssText = "display:flex; flex-direction:column; gap:1rem;";
+
+    consensus.modelEstimates.forEach(m => {
+      const item = document.createElement("div");
+      const safeModelKey = m.name.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+      item.setAttribute('data-block-id', `val_model_${safeModelKey}`);
+      item.style.cssText = "background:" + cardBg + "; border:1px solid " + border + "; border-left:4px solid " + m.color + "; border-radius:8px; padding:1.15rem; display:flex; flex-direction:column; gap:0.5rem;";
+
+      const linkHtml = m.verifiedLink
+        ? "<a href='" + m.verifiedLink + "' target='_blank' style='padding:0.25rem 0.55rem; background:#1e293b; color:" + m.color + "; border:1px solid " + m.color + "66; border-radius:4px; font-size:0.72rem; font-weight:bold; text-decoration:none; font-family:monospace;'>↗ Verify Original Session</a>"
+        : "<span style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace;'>Independent Test Run</span>";
+
+      item.innerHTML = [
         "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;'>",
-        "  <h2 style='margin:0; font-size:1.3rem; font-weight:900; color:" + accent + ";'>Multi-Billion Dollar Enterprise Consensus</h2>",
-        "  <span style='font-size:0.75rem; font-weight:bold; background:#0284c7; color:#fff; padding:0.2rem 0.6rem; border-radius:12px;'>Unanimous AI Economic Finding</span>",
+        "  <div style='display:flex; align-items:center; gap:0.5rem;'>",
+        "    <h3 style='margin:0; font-size:1.05rem; font-weight:bold; color:" + text + ";'>" + m.name + "</h3>",
+        "    <span style='font-size:0.85rem; font-weight:bold; color:" + m.color + "; font-family:monospace;'>" + m.range + "</span>",
+        "  </div>",
+        linkHtml,
         "</div>",
-        "<p style='margin:0; font-size:0.88rem; color:" + text + "; line-height:1.55;'>" + consensus.keyInsight + "</p>",
-        "<div style='display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; margin-top:0.5rem;'>",
-        "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:0.85rem;'>",
-        "    <div style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace; text-transform:uppercase;'>Consensus Midpoint</div>",
-        "    <div style='font-size:1.3rem; font-weight:900; color:#38bdf8; margin:0.2rem 0; font-family:monospace;'>" + consensus.consensusMidpoint + "</div>",
-        "    <div style='font-size:0.72rem; color:" + textMuted + ";'>Direct long-term enterprise value</div>",
-        "  </div>",
-        "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:0.85rem;'>",
-        "    <div style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace; text-transform:uppercase;'>Full Valuation Range</div>",
-        "    <div style='font-size:1.3rem; font-weight:900; color:#10b981; margin:0.2rem 0; font-family:monospace;'>" + consensus.consensusValuationRange + "</div>",
-        "    <div style='font-size:0.72rem; color:" + textMuted + ";'>Across conservative and strategic models</div>",
-        "  </div>",
-        "  <div style='background:" + panelInner + "; border:1px solid " + border + "; border-radius:8px; padding:0.85rem;'>",
-        "    <div style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace; text-transform:uppercase;'>Estimated Payroll ROI</div>",
-        "    <div style='font-size:1.3rem; font-weight:900; color:#f59e0b; margin:0.2rem 0; font-family:monospace;'>" + consensus.impliedPayrollROI + "</div>",
-        "    <div style='font-size:0.72rem; color:" + textMuted + ";'>On ~$300,000 in mid-90s compensation</div>",
-        "  </div>",
-        "</div>"
+        "<div style='font-size:0.75rem; color:" + textMuted + "; font-family:monospace; font-weight:bold;'>" + m.shareOfMarketCap + "</div>",
+        "<p style='margin:0; font-size:0.82rem; color:" + text + "; line-height:1.55;'>" + m.coreArgument + "</p>"
       ].join("");
-      wrapper.appendChild(banner);
+      list.appendChild(item);
+    });
+    wrapper.appendChild(list);
 
-      // Breakdown per model
-      const list = document.createElement("div");
-      list.style.cssText = "display:flex; flex-direction:column; gap:1rem;";
-
-      consensus.modelEstimates.forEach(m => {
-        const item = document.createElement("div");
-        item.style.cssText = "background:" + cardBg + "; border:1px solid " + border + "; border-left:4px solid " + m.color + "; border-radius:8px; padding:1.15rem; display:flex; flex-direction:column; gap:0.5rem;";
-
-        const linkHtml = m.verifiedLink
-          ? "<a href='" + m.verifiedLink + "' target='_blank' style='padding:0.25rem 0.55rem; background:#1e293b; color:" + m.color + "; border:1px solid " + m.color + "66; border-radius:4px; font-size:0.72rem; font-weight:bold; text-decoration:none; font-family:monospace;'>↗ Verify Original Session</a>"
-          : "<span style='font-size:0.7rem; color:" + textMuted + "; font-family:monospace;'>Independent Test Run</span>";
-
-        item.innerHTML = [
-          "<div style='display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;'>",
-          "  <div style='display:flex; align-items:center; gap:0.5rem;'>",
-          "    <h3 style='margin:0; font-size:1.05rem; font-weight:bold; color:" + text + ";'>" + m.name + "</h3>",
-          "    <span style='font-size:0.85rem; font-weight:bold; color:" + m.color + "; font-family:monospace;'>" + m.range + "</span>",
-          "  </div>",
-          linkHtml,
-          "</div>",
-          "<div style='font-size:0.75rem; color:" + textMuted + "; font-family:monospace; font-weight:bold;'>" + m.shareOfMarketCap + "</div>",
-          "<p style='margin:0; font-size:0.82rem; color:" + text + "; line-height:1.55;'>" + m.coreArgument + "</p>"
-        ].join("");
-        list.appendChild(item);
-      });
-      wrapper.appendChild(list);
-
-      return wrapper;
-    }
-
+    return wrapper;
+  }
   buildVerifySection(isLight, cardBg, panelInner, border, accent, text, textMuted) {
       const wrapper = document.createElement("div");
       wrapper.style.cssText = "display:flex; flex-direction:column; gap:1.25rem;";
