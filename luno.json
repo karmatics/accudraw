@@ -1,6 +1,6 @@
 {
   "name": "accudraw",
-  "version": "1.3.1",
+  "version": "1.5.1",
   "description": "AccuDraw & SmartLine: 30-Year Historical Archive, Patents, Lore & Economic Valuation",
   "type": "luno-web-app",
   "mainClass": "AccuDrawArchiveApp",
@@ -17,72 +17,36 @@
     "DomBasics.js",
     "UITools.js",
     "DictationWidget.js",
-    "DocumentReader.js"
+    "DocumentReader.js",
+    "SidePanel.js",
+    "SupabaseCommentsAdapter.js",
+    "CadPlanDataRegistry.js",
+    "CadPlanItemNotes.js",
+    "CadPlanDocumentEditor.js",
+    "CadPlanAardvark.js"
   ],
   "styles": [],
   "visibilitySets": {
-    "ui-focus": [
-      "js/AccuDrawArchiveApp.js",
-      "luno.json"
+    "accudraw-core": [
+      "accudraw/js/AccuDrawArchiveApp.js",
+      "accudraw/js/AccuDrawData.js",
+      "accudraw/index.html",
+      "accudraw/luno.json"
     ],
-    "ui-and-data": [
-      "js/AccuDrawArchiveApp.js",
-      "js/AccuDrawData.js",
-      "luno.json"
+    "articles-1995-powerdraft": [
+      "accudraw/accudraw_page1.html",
+      "accudraw/accudraw_page2.html"
     ],
-    "articles": [
-      "accudraw_page1.html",
-      "accudraw_page2.html",
-      "accudraw3d_page1.html",
-      "accudraw3d_page2.html",
-      "accudraw3d_page3.html"
+    "articles-1996-3d-thinking": [
+      "accudraw/accudraw3d_page1.html",
+      "accudraw/accudraw3d_page2.html",
+      "accudraw/accudraw3d_page3.html"
     ],
-    "full-app": [
-      "js/AccuDrawArchiveApp.js",
-      "js/AccuDrawData.js",
-      "index.html",
-      "luno.json"
+    "notes-inspector": [
+      "Library/CadPlanAardvark.js",
+      "Library/CadPlanItemNotes.js",
+      "Library/CadPlanDocumentEditor.js",
+      "Library/DocumentReader.js"
     ]
-  },
-  "processedCountSinceCheckpoint": 0,
-  "lastCheckpointTime": "2026-11-08T03:37:19.776Z",
-  "pendingCheckpointDescription": "Clean working tree",
-  "changedMethods": {
-    "situation/luno.json": "2026-10-18T04:45:34.804Z",
-    "luno.json": "2026-10-18T04:45:34.804Z",
-    "situation/js/SituationApp.js": "2026-10-18T04:45:34.804Z",
-    "situation/js/ElderAdvocacyPage.js": "2026-10-18T04:45:34.804Z",
-    "situation/js/CaretakerBiasPage.js": "2026-10-18T04:45:34.804Z",
-    "js/AccuDrawArchiveApp.js": "2026-10-18T04:45:34.804Z",
-    "CadPlan/js/CadPlanItemNotes.js": "2026-10-21T07:51:20.621Z",
-    "CadPlan/js/CadPlanDocumentEditor.js": "2026-10-18T04:48:01.910Z",
-    "Library/DocumentReader.js": "2026-10-21T07:54:05.839Z",
-    "EconomicsOfAutomation/js/EconomicsOfAutomation.js": "2026-10-18T04:48:01.910Z",
-    "Library/ThreeJSLoader.js": "2026-10-21T07:03:30.962Z",
-    "CadPlan/js/CadChoreographyEngine.js": "2026-10-21T07:22:02.438Z",
-    "CadPlan/js/CadChoreographyDemoComponent.js": "2026-10-21T07:03:30.962Z",
-    "CadPlan/js/CadDynamicDimensionHudLab.js": "2026-10-21T07:03:30.962Z",
-    "CadPlan/js/CompassSkinDemos.js": "2026-10-21T07:03:30.962Z",
-    "CadPlan/js/CadOriginsGraphicComponent.js": "2026-10-21T07:03:30.962Z",
-    "CadPlan/js/KeyCommandInteractiveLab.js": "2026-10-21T07:09:28.486Z",
-    "CadPlan/js/CadTouchP2PGraphicComponent.js": "2026-10-21T07:09:28.486Z",
-    "CadPlan/js/CurveDrawerLabComponent.js": "2026-10-21T07:09:28.486Z",
-    "CadPlan/js/CadAgentTelemetryLab.js": "2026-10-21T07:09:28.486Z",
-    "CadPlan/basic3d.css": "2026-10-21T07:22:02.438Z",
-    "CadPlan/js/CadMasterShowcaseComponent.js": "2026-10-21T07:22:02.438Z",
-    "CadPlan/js/CadLunoEcosystemContent.js": "2026-10-21T07:22:02.438Z",
-    "CadPlan/js/CadStudioDemoComponent.js": "2026-10-21T07:51:20.621Z",
-    "CadPlan/content/ecosystem.html": "2026-10-21T07:49:29.269Z",
-    "CadPlan/js/CompassSkinAddons.js": "2026-10-21T07:49:29.269Z",
-    "CadPlan/js/CadGeneticMutationLab.js": "2026-10-21T07:49:29.269Z",
-    "CadPlan/js/CadITwinParityContent.js": "2026-10-21T07:49:29.269Z",
-    "CadPlan/js/Cad2Dto3DRoundTripGraphic.js": "2026-10-21T07:49:29.269Z",
-    "CadPlan/js/AccuDrawPhilosophyContent.js": "2026-10-21T07:51:20.621Z",
-    "CadPlan/js/AccuCadAuditContent.js": "2026-10-21T07:51:20.621Z",
-    "CadPlan/js/CadInteractiveDemoContent.js": "2026-10-21T07:51:20.621Z",
-    "CadPlan/js/CadIsolatedCompass3DComponent.js": "2026-10-21T07:54:05.839Z",
-    "CadPlan/js/CadModelStudioComponent.js": "2026-10-21T07:54:05.839Z",
-    "CadPlan/js/CadPlanAardvark.js": "2026-10-21T07:54:05.839Z",
-    "CadPlan/js/CadPromptBundlerDialog.js": "2026-10-21T07:54:05.839Z"
   }
 }
